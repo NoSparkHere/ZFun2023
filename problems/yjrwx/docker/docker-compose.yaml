@@ -1,0 +1,11 @@
+version: '3'
+services:
+  test:
+    build: ../
+    environment:
+      # 仅为测试用flag
+      GZCTF_FLAG: "ZFun{W0w_yQu_7nD3r5Tand_P0p_N0w_1a0_Da_1s_8acK}"
+    ports:
+      # 设置了暴露端口
+      - 8080:80
+    restart: unless-stopped

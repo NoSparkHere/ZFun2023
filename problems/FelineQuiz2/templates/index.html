@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>菲林问答 Season 2</title>
+    <link
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+      rel="stylesheet"
+    />
+    <style>
+      img {
+        display: block;
+        margin: 0 auto 1rem;
+        max-width: 80%;
+        max-height: 50vh;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 border shadow rounded">
+      <div class="mx-4 my-4">
+        {% if ctx.answered %}
+        <div class="alert alert-primary" role="alert">你回答对了 {{ ctx.correct }} 题，可以拿到 {{ ctx.flags|length }} 个 Flag。</div>
+        {% if ctx.extra %}
+        <div class="alert alert-success" role="alert">你答对了额外题目，拿到了额外的 Flag！</div>
+        {% endif %}
+        <div class="alert alert-info" role="alert">在前五题里答对三题，你可以拿到第一个 Flag；答对前五题，你可以拿到第二个 Flag；如果你答对了额外题目，还可以拿到额外的 Flag。</div>
+        <ul>
+          {% for flag in ctx.flags%}
+          <li>{{ flag }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <h1>菲林问答 Season 2</h1>
+        <p>在中科大举办的 Hackergame 里，有一个喜闻乐见的“填空题”——猫咪问答。要拿到这个分数，你需要充分使用你手头上“搜索引擎”的力量。</p>
+        <p>上届 ZFun 2022 的某位申必出题人头昏脑胀之下，决定好好抄袭这个题目，出了一份《菲林问答》...</p>
+        <p>而这次的另一组申必出题人决定再延（dui）续（biao）这个题目，接着出一份《菲林问答 Season 2》！</p>
+        <h4>题目</h4>
+        <div>
+          <form action="/" method="post">
+            <div class="mb-3">
+              <label class="form-label" for="question1">1. 你是否苦于看不懂编译器晦涩难懂的提示？是否希望编译器能够更人性化一点？它来了它来了，它带着二次元走来了。它来了它来了，它带着 gcc 过来了。那么，能实现下面效果的项目的 Github 项目名是什么呢？</label>
+              <img src="{{ url_for('static', filename='img/1.png') }}" alt="Q1 img" />
+              <input class="form-control" type="text" name="question1">
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="question2">2. 常用的电脑键盘上有各种功能键，其中用于叫出开始菜单等功能的 Windows 徽标键是在微软影响下添加的按键之一，那么它是在哪一年最先出现的呢？</label>
+              <input class="form-control" type="text" name="question2">
+              <div class="form-text">注：四位数字年份</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="question3">3. Windows 10 系统中，发生致命错误后蓝屏界面上会显示一串由大写字母和下划线组成的状态码来提示错误的类型以便排除故障。但是系统中也提供了一个隐藏方式使机器在按下特定的组合键后手动触发蓝屏。这个时候提示的状态码是什么呢？</label>
+              <input class="form-control" type="text" name="question3">
+              <div class="form-text">注：仅包含大写字母与下划线</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="question4">4. 2023 年 7 月番《BanG Dream! It's MyGO!!!!!》中，MyGO!!!!! 乐队的名称“迷子”来自爱音和灯一同在水族馆看企鹅时灯在纸上写下的文字。剧中的水族馆在现实中也有对应的设计原型，它的名字是？</label>
+              <input class="form-control" type="text" name="question4">
+              <div class="form-text">注：填英文名称，大小写不敏感（快快给我去看 MyGO!!!!!）</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="question5">5. 到了大学之后，你会发现有一个人伴随着你的大学生活，他就是——宋浩老师。你的大学高数离不开他，当然说不定还有其他课你也会需要他.....请你找到宋浩账号中高数教学视频的 av 号。</label>
+              <input class="form-control" type="text" name="question5">
+              <div class="form-text">注：大小写不敏感</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="question6">EX. 书接上回：IETF（Internet Engineering Task Force，互联网工程任务组）有时会一反严肃的常态，出版一些有意思的 RFC（Request For Comments，用来标准化地发布互联网规范并得到外界反馈）。在 2023 年，它介绍了一种用于表示可爱猫猫图片的表示方法：Concat Notation。你能把下面的猫猫探头图片转换成对应的 Concat 表示吗？</label>
+              <img src="{{ url_for('static', filename='img/6.jpeg') }}" alt="Q6 img" />
+              <input class="form-control" type="text" name="question6">
+            </div>
+            <input class="btn btn-primary" type="submit" value="提交！">
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

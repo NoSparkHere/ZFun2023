@@ -1,0 +1,62 @@
+# Why you should use rust?
+
+Because rust is the Genshin-Impact in programming language!
+
+## Sure, but why, *really*?
+
+Ok you got me! Those are only a part of the reasons we chose Rust. If I'm honest, the main reason is because I love Rust.
+
+I believe Rust is the most important development in system programming languages since C. What is novel is not any individual feature ("Rust is not a particularly original language"), but the fact that so many amazing features have come together in one mainstream language.
+
+I'm not alone in loving Rust - Rust has been the most loved language in the Stack Overflow Developer Survey for seven years straight. So what are the features that make me love Rust so much?
+
+## Safety and speed 
+
+"Wait, that's two features!" - well yes, but what is novel is that I get both.
+
+To be clear: what I'm talking about here is memory safety, which mean handling array bounds checks, data races, use-after free, segfaults, uninitialized memory, etc.
+
+We've had fast languages like C and C++, and then we've had safe languages like Lisp, Java, and Python. The safe languages were all slower. Common wisdom said that a programming language could either be fast or safe, but not both. Rust has thoroughly disproved this, with speeds rivaling C even when writing safe Rust.
+
+What's even more impressive is that Rust achieves safety and speed without using a garbage collector. Garbage collectors can be very useful, but they also tend to waste a lot of memory and/or create CPU spikes during GC collection. But more importantly, GC languages are difficult to embed in other environments (e.g. compile to Wasm - more on that later).
+
+The big innovation leading to this "fast safety" is the borrow checker.
+
+## The borrow checker 
+
+The Rust Borrow Checker has it's roots in the Cyclone research language, and is arguably the most important innovation in system program languages since C.
+
+The gist of it is: each piece of data has exactly one owner. You can either share the data or mutate it, but never both at the same time. That is, you can either have one single mutating reference to it, OR many non-mutating references to the data.
+
+This is a great way to structure your program, as it prevents many common bugs (not just memory safety ones). The magic thing is that Rust enforces this at compile-time.
+
+A lot of people who are new to Rust struggle with the borrow checker, as it forbids you from doing things you are used to doing in other languages. The seasoned Rustacean knows to cut along the grain, to not fight the borrow checker, but to listen to its wisdom. When you structure your code so that each piece of data has one clear owner, and mutation is always exclusive, your program will become more clear and easy to reason about, and you will discover you have fewer bugs. It also makes it a lot easier to multi-thread your program.
+
+## Tooling 
+
+Rust has amazing tooling, which makes learning and using Rust a much more pleasant experience compared to most other languages.
+
+First of all: the error messages from the compiler are superb. They point out what your mistake was, why it was a mistake, and then often point you in the right direction. The Rust compiler errors are perhaps the best error messages of any software anywhere (which is fortunate, since learning Rust can be difficult).
+
+Then there is Cargo, the Rust package manager and build system. Having a package manager and a build system for a language may seem like a low bar, but when you come from C++, it is amazing. You can build almost any Rust library with a simple cargo build, and test it with cargo test.
+
+Rust libraries are known as crates (and can be browsed at crates.io). Though the ecosystem is nascent, there is already a plethora of high quality crates, and trying out a crate is as easy as cargo add. There is of course some legitimate worry that the Rust crate ecosystem could devolve into the crazy left-pad world of npm, and it is something to be wary about, but so far the Rust crates keep an overall high quality.
+
+And then there is the wonderful rust analyzer which provides completion, go-to-definition, and refactoring to my editor.
+
+Rust documentation is also really good, partially because of the effort of its writers, partially because of the amazing tooling. cargo doc is a godsend, as are doc-tests:
+
+```rust
+/// Adds two numbers together.
+///
+/// ## Example:
+/// ```
+/// assert_eq!(add(1, 2), 3);
+/// assert_eq!(add(10, -10), 0);
+/// ```
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+```
+
+The compiler will actually run the example code to check that it is correct! Amazeballs!

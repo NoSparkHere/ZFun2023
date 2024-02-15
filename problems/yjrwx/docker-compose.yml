@@ -1,0 +1,11 @@
+version: '2'
+services:
+  challenge:
+    build: .
+    entrypoint: ["/bin/true"]
+  front:
+    extends:
+      file: ../manager/docker-compose.yml
+      service: front
+    depends_on:
+      - challenge

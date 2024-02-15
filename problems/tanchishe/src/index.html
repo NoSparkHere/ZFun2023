@@ -1,0 +1,141 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>贪吃蛇</title>
+    <script type="text/javascript">
+      function draw(status = 0) {
+        var canvas = document.getElementById("tutorial");
+        var ctx = canvas.getContext("2d");
+        var gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+
+        // 定义渐变的颜色段
+        gradient.addColorStop(0, '#74ebd5');    // 起始位置为红色
+        gradient.addColorStop(0.5, '#acb6e5'); // 中间位置为绿色
+        gradient.addColorStop(1, '#e0a4f6');    // 结束位置为蓝色
+
+        // 将渐变填充到整个 Canvas
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        var snake = [41,40],
+            direction = 1,
+            food = 43,
+            n;
+        var marks = -1;
+        //canvas操作
+        function draw(seat, color){
+            ctx.fillStyle = color;
+            ctx.fillRect(seat %30 *30 + 1,~~(seat/30)*30 + 1,28,28);
+        }
+        //擦除尾方格
+        function del(seat){
+            ctx.fillStyle = gradient;
+            ctx.fillRect(seat %30 *30 + 1,~~(seat/30)*30 + 1,28,28,28,28);
+        }
+        //上下左右添加监听
+        document.onkeydown = function(evt){
+            direction = snake[1] - snake[0] ==(n =[-1,-30,1,30][(evt || event).keyCode - 37] || direction) ? direction : n;
+        }
+        //游戏程序主体
+        !function() {
+            snake.unshift(n = snake[0] + direction);    
+                                    //此时的n为下次蛇头出现的位置，n进入队列
+            if(snake.indexOf(n, 1) > 0 || n < 0 || n > 899 || direction == 1 && n % 30 == 0 || direction == -1 && n % 30 == 29) {
+                                     //if语句判断贪吃蛇是否撞到自己或者墙壁，碰到时返回，结束程序
+                                     //POST发包获取flag
+                if(marks){
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "./check.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState === 4 && xhr.status === 200){
+                            var response = JSON.parse(xhr.responseText);
+                            alert(response.message);
+                        }
+                    };
+                    var data = {
+                        mark: marks,
+                    };
+                    xhr.send(JSON.stringify(data));
+                }
+                showbutton();
+                return alert("GAME OVER!\r\nYour mark is "+ marks);
+            }
+            draw(n, "lime");        //画出蛇头下次出现的位置
+            if(n == food) {         //如果吃到食物时，产生一个蛇身以外的随机的点，不会去掉蛇尾
+                marks++;
+                //更新页面marks
+                var marksElement = document.getElementById('marksValue');
+                marksElement.textContent = marks;
+                //存储到localStorage
+                var newElement = marks;
+                localStorage.setItem('mark', JSON.stringify(newElement));
+                while (snake.indexOf(food = ~~(Math.random() * 900)) > 0);
+                draw(food, "yellow");
+            } else {                //没有吃到食物时正常移动，蛇尾出队列
+                del(snake.pop());
+            }
+            if(marks<=10 && marks>-1 && !status){
+            setTimeout(arguments.callee, 150);
+                                   //每隔0.15秒执行函数一次，可以调节蛇的速度
+            }else if(marks>10 && marks<=20 && !status){
+              setTimeout(arguments.callee, 100);
+            }else if(marks > 20 && !status){
+              setTimeout(arguments.callee, 50);
+            }else{
+              setTimeout(arguments.callee, 30);
+            }
+        }();
+      }
+      function hidebutton(){
+        document.getElementById("mybutton").style.display = "none";
+        document.getElementById("hard").style.display = "none";
+      }
+      function showbutton(){
+        document.getElementById("mybutton").style.display = "flex";
+        document.getElementById("hard").style.display = "flex";
+      }
+    </script>
+    <style type="text/css">
+      body {
+        display: flex;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+      }
+      canvas {
+        border: 1px solid black;
+        /*background-color: black;*/
+      }
+      #texxt {
+        position: absolute; /* 设置文本为绝对定位 */
+        top: 0; /* 设置文本距离顶部的距离，可以调整为你想要的值 */
+        left: 50%; /* 设置文本水平居中 */
+        transform: translateX(-50%); /* 通过 transform 属性水平居中 */
+        margin: 0;
+        color: #e80f0f; /* 设置文本颜色 */
+        font-size: 16px; /* 设置文本字体大小 */
+        font-family: Arial, sans-serif; /* 设置文本字体 */
+        white-space: pre-line; /* 控制换行符 */
+      }
+      #buttoon{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="texxt">
+        If you get 200 marks, I will give you flag
+        Your mark is: <span id="marksValue">0</span>
+    </div>
+    <div id="buttoon">
+      <button id = "mybutton" onclick = "hidebutton();draw();">Start</button>
+      <button id = "hard" onclick = "hidebutton();draw(1);">Start hell</button>
+    </div>
+    <canvas id="tutorial" width="900" height="900">对不起你的浏览器不支持canvas，建议使用Chrome或者Edge</canvas>
+  </body>
+</html>
