@@ -9,7 +9,7 @@ flags:
 - name: 
   score: 50
   type: text
-  flag: "ZFun{hel0_miNecraFt}"
+  flag: "ZFun{he1l0_miNecraFt}"
 ---
 
 做题之余，放松一下吧。
