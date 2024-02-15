@@ -37,4 +37,4 @@ flags:
 | 3   | 逆波兰表达式       | 300  |
 | 4   | 祥子别哭           | 500  |
 
-本目录下的 `data` 文件夹在 [FlagJudge](https://github.com/ZeroAurora/FlagJudge) 下部署，`std` 文件夹是 [@BillZhou233](https://github.com/BillZhou233) 的标准答案。
+本目录下的 `data` 文件夹在 [FlagJudge](https://github.com/ZeroAurora/FlagJudge) 下部署，`std` 文件夹是生成数据时使用的参考程序，由 [@BillZhou233](https://github.com/BillZhou233) 写就。
