@@ -6,7 +6,7 @@
 
 本来不准备写wp(毕竟做的挺差的)，但是受~~出题人之一~~朋友[@APP1223](https://github.com/1223APP)~~要求~~邀请，就来写一下
 
-反正我这次题目很多都是走漏洞~~txt~~，有些现在都不懂预期解法，所以内容不建议认真读()
+反正我这次题目很多都是走漏洞~~txt~~，有些现在都不懂预期解法，所以内容不建议认真读，~~(顺便庆幸一下一些主要对手被抓去出题了)~~
 
 编写格式借鉴了去年[@Yang](https://github.com/Yang-Fly)的[wp](https://github.com/NoSparkHere/ZFun2022/blob/main/WriteUp/Yang/README.md)
 
