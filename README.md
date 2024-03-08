@@ -52,7 +52,7 @@ ZFun 是连江一中计算机社主办，Team GreenSpark 承办的，采取类 C
 |----------------------------------|--------------------------------------------------|
 | 主办                               | 连江一中计算机社                                         |
 | 承办                               | Team GreenSpark                                  |
-| 主催 & 平台开发运维                      | ZeroAurora \#Forever Dreamful                  |
+| 主催 & 平台开发运维                      | ZeroAurora \#ForeverDreamful                  |
 | 域名提供                             | Reverier \#欢迎报考西电                                |
 | 四大名著 出题人                         | 墨染琴弦 \| NULL \#只是一个萌新                            |
 | Welcome to Minecraft 出题人         | 墨染琴弦 \| NULL \#只是一个萌新                            |
